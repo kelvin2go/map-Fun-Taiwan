@@ -1,6 +1,10 @@
 # mapfun
 
-> a google map for taiwan event
+> a google map for taiwan event,
+    # [VueJs](https://vuejs.org/)
+    # [vueMaterial](http://vuematerial.io/)
+    # [stdlib](https://stdlib.com/)
+    # [douban](https://developers.douban.com/wiki/?title=api_v2)
 
 ## Build Setup
 
@@ -17,6 +21,7 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 # map-Fun-Taiwan
