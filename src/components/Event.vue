@@ -10,8 +10,8 @@ import axios from 'axios'
 import Chinese from 'chinese-s2t'
 // import _ from 'lodash'
 
-// const API = 'https://api.myjson.com/bins/rm07z'
-const API = 'https://kelvin.stdlib.com/getapi/'
+const API = 'https://api.myjson.com/bins/rm07z'
+// const API = 'https://kelvin.stdlib.com/getapi/'
 
 const HTTP = axios.create({
   baseURL: `https://api.douban.com/v2/`,
@@ -29,8 +29,7 @@ export default {
   name: 'event',
   data () {
     return {
-      errors: [],
-      markers: []
+      errors: []
     }
   },
   components: {
