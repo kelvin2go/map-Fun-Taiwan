@@ -1,5 +1,6 @@
 <template>
   <div class="mapFun">
+    <md-spinner md-indeterminate v-if="loading"></md-spinner>
     <mapfun v-if="apiMarkers" :markers="apiMarkers"></mapfun>
   </div>
 </template>
@@ -10,8 +11,8 @@ import axios from 'axios'
 import Chinese from 'chinese-s2t'
 // import _ from 'lodash'
 
-const API = 'https://api.myjson.com/bins/rm07z'
-// const API = 'https://kelvin.stdlib.com/getapi/'
+// const API = 'https://api.myjson.com/bins/rm07z'
+const API = 'https://kelvin.stdlib.com/getapi/'
 
 const HTTP = axios.create({
   baseURL: `https://api.douban.com/v2/`,
@@ -29,7 +30,8 @@ export default {
   name: 'event',
   data () {
     return {
-      errors: []
+      errors: [],
+      loading: true
     }
   },
   components: {
@@ -41,7 +43,7 @@ export default {
       var rObj = []
       for (let event of ary.events) {
         let geo = event.geo.split(' ')
-        if (geo[0] !== '0.0') {
+        if (geo[0] !== '0.0' && geo[0] > 22 && geo[0] < 28) {
           rObj.push({
             id: event.id,
             position: {
@@ -59,12 +61,14 @@ export default {
     }
   },
   created () {
+    this.loading = true
     HTTP.get(API)
     .then(response => {
       console.log(response.data)
       this.apiMarkers = this.makeList(response.data)
       console.log('done')
       console.log(this.apiMarkers)
+      this.loading = false
     })
     .catch(e => {
       this.errors.push(e)
