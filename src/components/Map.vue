@@ -5,17 +5,17 @@
       <md-card class="modalContainer" v-if="activeEvent">
         <md-card-header>
           <md-card-header-text>
-            <div class="md-title">{{s2t(activeEvent.event.title)}}</div>
+            <div class="md-title">{{ s2t(activeEvent.event.title) }}</div>
             <div class="phone-viewport">
               <md-list>
                 <md-list-item>
                   <md-icon>date_range</md-icon> <span> {{activeEvent.event.begin_time}} - {{activeEvent.event.end_time}}</span>
                 </md-list-item>
                 <md-list-item>
-                  <md-icon>room</md-icon> <span><a :href="geoLink(activeEvent)" target="_blank">{{activeEvent.event.address}}</a></span>
+                  <md-icon>room</md-icon> <span><a :href="geoLink(activeEvent)" target="_blank">{{ s2t(activeEvent.event.address) }}</a></span>
                 </md-list-item>
                 <md-list-item>
-                  <md-icon>attach_money</md-icon> <span>{{activeEvent.event.price_range}}</span>
+                  <md-icon>attach_money</md-icon> <span>{{s2t(activeEvent.event.price_range)}}</span>
                 </md-list-item>
               </md-list>
             </div>
@@ -63,17 +63,21 @@
       }
     },
     methods: {
-      s2t: (text) => {
-        return Chinese.s2t(text)
+      s2t: (value) => {
+        return Chinese.s2t(value)
       },
       close: () => {
         this.opened = false
       },
       geoLink: (event) => {
-        console.log('DFX')
         console.log(event)
+        let url = 'http://maps.google.com/maps?daddr=' + event.position.lat + ',' + event.position.lng + '&amp;ll='
         // console.log('geo: ' + this.activeEvent.position.lat + ',' + this.activeEvent.position.lng + ',u=35')
-        return `geo: ${event.position.lat},${event.position.lng},u=35`
+        if ((navigator.platform.indexOf('iPhone') !== -1) || (navigator.platform.indexOf('iPod') !== -1) ||
+          (navigator.platform.indexOf('iPad') !== -1)) {
+          url = 'maps://maps.google.com/maps?daddr=' + event.position.lat + ',' + event.position.lng + '&amp;ll='
+        }
+        return url
       }
 
     },
